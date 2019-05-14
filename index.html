@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="js/lib/history/jquery.history.js"></script>
+    <script src="js/lib/url/url.min.js"></script>
+    <script src="js/lib/CLDRPluralRuleParser/CLDRPluralRuleParser.js"></script>
+    <script src="js/lib/jquery.i18n/jquery.i18n.js"></script>
+    <script src="js/lib/jquery.i18n/jquery.i18n.messagestore.js"></script>
+    <script src="js/lib/jquery.i18n/jquery.i18n.fallbacks.js"></script>
+    <script src="js/lib/jquery.i18n/jquery.i18n.language.js"></script>
+    <script src="js/lib/jquery.i18n/jquery.i18n.parser.js"></script>
+    <script src="js/lib/jquery.i18n/jquery.i18n.emitter.js"></script>
+    <script src="js/lib/jquery.i18n/jquery.i18n.emitter.bidi.js"></script>
+    <script src="js/global.js"></script>
+
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: auto auto;
+            grid-template-rows: auto auto auto;
+            padding: 1%;
+        }
+
+        #select_original {
+        }
+
+        #select_new {
+        }
+
+        #size_original {
+
+        }
+
+        #size_new {
+
+        }
+
+        .left {
+            grid-column-start: 1;
+            grid-column-end: 1;
+            grid-row-start: 1;
+            grid-row-end: 1;
+            margin: 5px;
+            border-radius: 2%;
+            background-color: #5bc0de;
+            padding: 10px;
+
+        }
+
+        .right {
+            grid-column-start: 2;
+            grid-column-end: 2;
+            grid-row-start: 1;
+            grid-row-end: 1;
+            margin: 5px;
+        }
+
+        .center {
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .round {
+            background-color: white;
+            width: 100px;
+            height: 100px;
+            border: 2px solid rgba(53, 32, 220, 0.9);
+
+            border-radius: 50%;
+            margin-bottom: 5%;
+            margin-top: 5%;
+        }
+
+        .square {
+            background-color: white;
+            width: 100px;
+            height: 100px;
+            border-radius: 3%;
+            border: 2px solid rgba(53, 32, 220, 0.9);
+
+            margin-bottom: 5%;
+            margin-top: 5%;
+        }
+
+        .bg-white {
+            background-color: white;
+        }
+
+        body {
+            background-color: #ffffff;
+
+        }
+
+        img {
+            height: 15px;
+            width: 30px;
+        }
+
+        .card-title {
+            color: #f9f9f9;
+        }
+        #select_original{
+            color: #5b687d;
+        }
+        #select_new{
+             color: #5b687d;
+         }
+
+    </style>
+
+</head>
+<body>
+<div class="section section-hero bg-primary">
+
+    <h2 data-i18n="app-title">Cake Calculator</h2>
+    <div class="docs-navbar">
+        <div class="switch-locale">
+            <span><a href="#" data-locale="en"><img
+                    src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/flags/1x1/us.svg" alt="English"></a></span>
+            /
+            <span><a href="#" data-locale="de"><img
+                    src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/flags/1x1/de.svg" alt="Deutsch"></a></span>
+        </div>
+    </div>
+    <div class="grid-hero container grid-lg text-center text-light" id="overview">
+
+
+        <div class="columns text-light">
+            <div class="column col-7 col-xs-12 col-mx-auto">
+                <div class="card text-center">
+                    <div class="card-header"><span class="card-title" data-i18n="orig">Original</span></div>
+                    <div class="round center" id="shape_original"></div>
+                    <div class="form-group" class="group" onchange="calculate()">
+                        <select class="form-select" id="select_original" onchange="change_shape('shape_original')">
+                            <option value="" disabled selected></option>
+                            <option value="round" data-i18n="round" selected>
+                                Round
+                            </option>
+                            <!--option value="rect" data-i18n="rect">
+                                Rectangular
+                            </option-->
+                            <option value="square" data-i18n="square">
+                                Square
+                            </option>
+                        </select>
+                        <label class="form-label" for="size_original" data-i18n="diameter">Diameter/Side</label>
+                        <input class="form-input" type="text" id="size_original" value="30">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="column col-7 col-xs-12 col-mx-auto">
+            <div class="card text-center bg-white">
+                <div class="card-header"><span class="card-title" data-i18n="new">New</span></div>
+                <div class="round center" id="shape_new"></div>
+
+                <div class="form-group" onchange="calculate()">
+                    <select class="form-select" id="select_new" onchange="change_shape('shape_new')">
+                        <option value="" disabled selected></option>
+                        <option value="round" data-i18n="round" selected>
+                            Round
+                        </option>
+                        <!--option value="rect" data-i18n="rect">
+                           Rectangular
+                       </option-->
+                        <option value="square" data-i18n="square">
+                            Square
+                        </option>
+
+                    </select>
+
+
+                    <label class="form-label" for="size_new" data-i18n="diameter">Diameter/Side</label>
+                    <input class="form-input" type="text" id="size_new" value="30">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section section-features bg-gray  text-center">
+    <div class="center">
+        <div class="card text-center "><b>
+        <span data-i18n="multiply">Multiply ingredients by:</span></b><br>
+        <span id="result"> 1
+                </span>
+        </div>
+    </div>
+    <!--div class="container grid-lg text-center">
+            <div class="column col-4 col-xs-12 col-mx-auto">
+                box1
+            </div>
+            <div class="column col-4 col-xs-12 col-mx-auto">
+                box2
+            </div>
+
+        </div-->
+    </div>
+</div>
+</body>
+<script>
+    function calculate() {
+        function calc_area(shape, size) {
+            if (shape == "round") {
+                return 2 * Math.PI * Math.pow(size / 2, 2);
+            } else if (shape == "square") {
+                return size * size;
+            }
+        }
+
+        const el1 = document.getElementById('select_original')
+        const shape_original = el1.options[el1.selectedIndex].value;
+        const size_original = parseFloat(document.getElementById('size_original').value);
+        const area_original = calc_area(shape_original, size_original)
+
+        const el2 = document.getElementById('select_new')
+        const shape_new = el2.options[el2.selectedIndex].value;
+        const size_new = parseFloat(document.getElementById('size_new').value);
+        const area_new = calc_area(shape_new, size_new)
+
+
+        document.getElementById("result").innerHTML = Math.round(area_new / area_original * 100) / 100
+    }
+
+    function change_shape(location) {
+
+        const element = document.getElementById(location)
+        element.classList.toggle('square');
+        element.classList.toggle('round');
+
+
+    }
+</script>
+</html>

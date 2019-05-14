@@ -1,0 +1,21 @@
+{
+  "@metadata": {
+    "authors": [
+      "Anja",
+      "Reusch"
+    ],
+    "last-updated": "2019-05-12",
+    "locale": "en"
+  },
+  "title": "Cake Calculator",
+  "app-title": "Cake Calculator",
+  "round": "Round",
+  "rect": "Rectangular",
+  "square": "Square",
+  "calculate": "Calculate",
+  "diameter": "Diameter/ Side:",
+  "orig": "Original Size",
+  "new": "New Size",
+  "multiply": "Multiply ingredients by:"
+
+}

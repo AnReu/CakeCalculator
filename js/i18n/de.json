@@ -1,0 +1,20 @@
+{
+  "@metadata": {
+    "authors": [
+      "Anja",
+      "Reusch"
+    ],
+    "last-updated": "2019-05-12",
+    "locale": "de"
+  },
+  "title": "Kuchen-Rechner",
+  "app-title": "Kuchen-Rechner",
+  "round": "Runde Springform",
+  "rect": "Rechteckige Form",
+  "square": "Quadratische Form",
+  "calculate": "Berechnen",
+  "diameter": "Durchmesser/ Seitenlänge:",
+  "orig": "Originale Größe",
+  "new": "Neue Größe",
+  "multiply": "Multipliziere die Zutaten mit:"
+}
